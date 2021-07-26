@@ -1,12 +1,13 @@
-const express = require('express');
+module.exports = (req, res) => {
+  let who = 'html';
 
-const app = express();
+  if (req.body && req.body.who) {
+    who = req.body.who;
+  } else if (req.query.who) {
+    who = req.query.who;
+  } else if (req.cookies.who) {
+    who = req.cookies.who;
+  }
 
-const htmlRouter = require('./html/htmlRouter');
-
-app.use('/html',htmlRouter);
-
-
-app.listen(4000, () => {
-  console.log('启动成功');
-})
+  res.status(200).send(`Hello ${who}!`);
+};
