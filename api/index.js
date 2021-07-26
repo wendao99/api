@@ -1,7 +1,12 @@
-module.exports = (req, res) => {
-  const {
-    query: { name },
-  } = req;
+const express = require('express');
 
-  res.send(`Hello ${name}!`);
-};
+const app = express();
+
+const htmlRouter = require('./html/htmlRouter');
+
+app.use('/html',htmlRouter);
+
+
+app.listen(4000, () => {
+  console.log('启动成功');
+})
